@@ -1,49 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text, Input, Button } from "@chakra-ui/react";
+import { derivative, evaluate } from "mathjs";
+import nerdamer from "nerdamer";
+import "nerdamer/Solve";
+import "nerdamer/Calculus";
 
 const MathProblemGame: React.FC = () => {
   const [problem, setProblem] = useState<string>(""); // Math problem
-  const [answer, setAnswer] = useState<number | string>(""); // User's input
+  const [answer, setAnswer] = useState<string>(""); // User's input
   const [correctAnswer, setCorrectAnswer] = useState<number>(0); // Correct answer
-  const [timeLeft, setTimeLeft] = useState<number>(30); // Time left
+  const [timeLeft, setTimeLeft] = useState<number>(30); // Changed to 30 seconds
   const [result, setResult] = useState<string>(""); // Result message
   const [isRunning, setIsRunning] = useState<boolean>(false); // Is the game running?
 
-  // Generate a random math problem
+  // Generate a random calculus problem
   const generateProblem = () => {
-    const num1 = Math.floor(Math.random() * 50) + 1;
-    const num2 = Math.floor(Math.random() * 50) + 1;
-    const operators = ["+", "-", "*"];
-    const operator = operators[Math.floor(Math.random() * operators.length)];
+    const problemType = Math.random() < 0.5 ? "derivative" : "integral"; // Randomly choose derivative or integral
 
-    // Calculate the correct answer
-    let result: number;
-    switch (operator) {
-      case "+":
-        result = num1 + num2;
-        break;
-      case "-":
-        result = num1 - num2;
-        break;
-      case "*":
-        result = num1 * num2;
-        break;
-      default:
-        result = 0;
+    let problem: string;
+    let solution: number;
+
+    if (problemType === "derivative") {
+      // Generate a random polynomial
+      const a = Math.floor(Math.random() * 10) + 1; // Coefficient
+      const b = Math.floor(Math.random() * 5) + 1; // Exponent
+      const c = Math.floor(Math.random() * 10) - 5; // Constant
+      const expression = `${a}x^${b} + ${c}`;
+
+      // Calculate the derivative at x = 1
+      problem = `Find the derivative of ${expression} at x = 1`;
+      solution = evaluate(derivative(expression, "x").toString(), { x: 1 });
+    } else {
+      // Generate a random polynomial for integration
+      const a = Math.floor(Math.random() * 5) + 1;
+      const b = Math.floor(Math.random() * 5) + 1;
+      const expression = `${a}x^${b}`;
+      const lowerBound = 1;
+      const upperBound = 2;
+
+      // Calculate the definite integral using nerdamer
+      const integralExpression = nerdamer.integrate(expression, "x").toString();
+      const upperValue = evaluate(integralExpression, { x: upperBound });
+      const lowerValue = evaluate(integralExpression, { x: lowerBound });
+      solution = upperValue - lowerValue;
+
+      problem = `Evaluate the integral of ${expression} from ${lowerBound} to ${upperBound}`;
     }
 
-    setProblem(`${num1} ${operator} ${num2}`);
-    setCorrectAnswer(result);
+    setProblem(problem);
+    setCorrectAnswer(Number(solution.toFixed(2))); // Round the solution to 2 decimal places
     setAnswer("");
     setResult("");
-    setTimeLeft(30);
+    setTimeLeft(30); // Reset the timer to 30 seconds
   };
 
   // Start the game
   const startGame = () => {
     generateProblem();
     setIsRunning(true);
-    setTimeLeft(30);
+    setTimeLeft(30); // Set to 30 seconds
   };
 
   // Handle input change
@@ -53,12 +68,13 @@ const MathProblemGame: React.FC = () => {
 
   // Check the answer
   const checkAnswer = () => {
-    if (parseInt(answer as string, 10) === correctAnswer) {
-      setResult("🎉 Correct! Great job!");
+    if (parseFloat(answer) === correctAnswer) {
+      setResult("You just proved you are a bot, dumbass. -1");
+      setIsRunning(false); // Stop the game
     } else {
-      setResult("❌ Incorrect. Try again!");
+      setResult("❌ Incorrect! Try this new question.");
+      generateProblem(); // Generate a new question
     }
-    setIsRunning(false); // Stop the game
   };
 
   // Countdown timer
@@ -69,8 +85,8 @@ const MathProblemGame: React.FC = () => {
       }, 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0 && isRunning) {
-      setResult("⏰ Time's up! Better luck next time.");
-      setIsRunning(false);
+      setResult("🎉 Congratulations! You won by running out the clock!");
+      setIsRunning(false); // Stop the game when the timer runs out
     }
   }, [isRunning, timeLeft]);
 
@@ -79,46 +95,60 @@ const MathProblemGame: React.FC = () => {
       height="100vh"
       alignItems="center"
       justifyContent="center"
-      flexDir="column"
-      bgGradient="linear(to-r, #575ce5 50%, #f9fbfc 50%)"
-      textAlign="center"
+      bg="white"
     >
-      <Text fontSize="2xl" fontWeight="bold" mb="4">
-        Solve the Math Problem
-      </Text>
-
-      {!isRunning ? (
-        <Button colorScheme="blue" onClick={startGame} mb="4">
-          Start Game
-        </Button>
-      ) : (
-        <Flex flexDir="column" alignItems="center">
-          <Text fontSize="xl" mb="2">
-            {problem}
-          </Text>
-          <Input
-            type="number"
-            placeholder="Enter your answer"
-            value={answer}
-            onChange={handleInputChange}
-            mb="4"
-            width="200px"
-            textAlign="center"
-          />
-          <Button colorScheme="green" onClick={checkAnswer} mb="4">
-            Submit Answer
-          </Button>
-          <Text fontSize="lg" mb="2">
-            Time Left: {timeLeft}s
-          </Text>
-        </Flex>
-      )}
-
-      {result && (
-        <Text fontSize="lg" fontWeight="bold" color="red.500" mt="4">
-          {result}
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        p="8"
+        border="1px solid #ccc"
+        borderRadius="md"
+        boxShadow="lg"
+        bg="white"
+      >
+        <Text fontSize="2xl" fontWeight="bold" mb="4">
+          Solve the Math Problem
         </Text>
-      )}
+
+        {!isRunning ? (
+          <Button colorScheme="blue" onClick={startGame} mb="4">
+            Start Game
+          </Button>
+        ) : (
+          <Flex flexDir="column" alignItems="center">
+            <Text fontSize="xl" mb="2">
+              {problem}
+            </Text>
+            <Input
+              type="number"
+              placeholder="Enter your answer"
+              value={answer}
+              onChange={handleInputChange}
+              mb="4"
+              width="200px"
+              textAlign="center"
+            />
+            <Button colorScheme="green" onClick={checkAnswer} mb="4">
+              Submit Answer
+            </Button>
+            <Text fontSize="lg" mb="2">
+              Time Left: {timeLeft}s
+            </Text>
+          </Flex>
+        )}
+
+        {result && (
+          <Text
+            fontSize="lg"
+            fontWeight="bold"
+            color={result.includes("🎉") ? "green.500" : "red.500"}
+            mt="4"
+          >
+            {result}
+          </Text>
+        )}
+      </Flex>
     </Flex>
   );
 };
