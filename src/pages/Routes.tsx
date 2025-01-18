@@ -16,7 +16,7 @@ const App: React.FC = () => (
 			<Route path="/mathproblemgame" element={<MathProblemGame />} />
 			<Route path="/treasure" element={<Treasure />} />
 			<Route path="/captcha" element={<Captcha />} />
-			<Route path="/aimtrainer" element={<AimTrainer />}>
+			<Route path="/aimtrainer" element={<AimTrainer />} />
 		</Routes>
 	</Router>
 )

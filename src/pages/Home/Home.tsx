@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 							onChange={() => {
 								setTimeout(() => {
 									setClicked(!clicked)
-								}, 400)
+								}, 600)
 							}}
 						/>
 					)}
