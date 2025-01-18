@@ -1,6 +1,6 @@
 import { Flex, Checkbox, Text, Image, Spinner } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import img from './captcha.svg'
+import img from '/images/captcha.svg'
 import { useState } from 'react'
 
 const Home: React.FC = () => {
