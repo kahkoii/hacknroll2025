@@ -148,7 +148,7 @@ const MathProblemGame: React.FC = () => {
 					<Text
 						fontSize="lg"
 						fontWeight="bold"
-						color={result.includes('🎉') ? 'green.500' : 'red.500'}
+						color={result.includes('🤔') ? 'green.500' : 'red.500'}
 						mt="4"
 					>
 						{result}
