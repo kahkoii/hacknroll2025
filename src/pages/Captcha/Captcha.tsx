@@ -14,6 +14,11 @@ const Captcha: React.FC = () => {
   const [selectedCaptcha, setSelectedCaptcha] = useState<typeof captchaOptions[0] | null>(null); // Selected CAPTCHA
   const [userInput, setUserInput] = useState<string>(""); // User's input
   const [result, setResult] = useState<string>(""); // Result message
+  const [buttonPosition, setButtonPosition] = useState<{ top: string; left: string } | null>(
+    null // No random position at the start
+  );
+
+  const [hoverTimeout, setHoverTimeout] = useState<number | null>(null); // Timer for button teleportation
 
   // Function to randomly select a CAPTCHA
   const selectRandomCaptcha = () => {
@@ -28,9 +33,30 @@ const Captcha: React.FC = () => {
     if (userInput === selectedCaptcha?.text) {
       setResult("✅ Correct! Guess you can read.");
     } else {
-      setResult("❌ Incorrect! Wow.");
+      setResult("❌ Incorrect! Try again.");
       selectRandomCaptcha(); // Show a new CAPTCHA if incorrect
     }
+  };
+
+  // Function to teleport the button
+  const teleportButton = () => {
+    const randomTop = Math.random() * 80 + "%"; // Random position within 80% of the viewport
+    const randomLeft = Math.random() * 80 + "%"; // Random position within 80% of the viewport
+    setButtonPosition({ top: randomTop, left: randomLeft });
+  };
+
+  // Start teleport timer
+  const startHoverTimeout = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout); // Clear any existing timer
+    const timeout = setTimeout(() => {
+      teleportButton(); // Teleport button after 1000ms
+    }, 20);
+    setHoverTimeout(timeout as unknown as number);
+  };
+
+  // Stop teleport timer
+  const stopHoverTimeout = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
   };
 
   // Initialize CAPTCHA on component load
@@ -45,11 +71,11 @@ const Captcha: React.FC = () => {
       justifyContent="center"
       bg="gray.100"
       p="4"
+      position="relative"
     >
       <Flex
         direction="column"
         align="center"
-        // justify="center"
         padding="3"
         bg="white"
         border="2px solid #40376E"
@@ -57,11 +83,12 @@ const Captcha: React.FC = () => {
         boxShadow="lg"
         width="300px"
         height="400px" // Fixed height for the entire box
+        position="relative"
       >
         <Flex>
           {/* Text with Border */}
           <Box
-            mb="2" // Reduced margin-bottom
+            mb="2"
             textAlign="center"
             width="100%"
             border="2px solid #2A73E8"
@@ -75,14 +102,14 @@ const Captcha: React.FC = () => {
             </Text>
           </Box>
         </Flex>
-      
+
         {/* CAPTCHA Image Container with Fixed Dimensions */}
         {selectedCaptcha && (
           <Box
             mb="4"
             textAlign="center"
-            width="250px" // Fixed width for the image container
-            height="150px" // Fixed height for the image container
+            width="250px"
+            height="150px"
             bg="white"
             borderRadius="md"
             display="flex"
@@ -91,9 +118,9 @@ const Captcha: React.FC = () => {
             overflow="hidden"
           >
             <Image
-              src={selectedCaptcha.image} // Dynamically link the image
+              src={selectedCaptcha.image}
               alt="CAPTCHA"
-              objectFit="contain" // Ensure the image scales proportionally
+              objectFit="contain"
               maxW="100%"
               maxH="100%"
             />
@@ -116,9 +143,16 @@ const Captcha: React.FC = () => {
           <Button
             width="70%"
             colorScheme="blue"
-            onClick={validateCaptcha}
-            flex="1"
-            mr="1"
+            onClick={() => {
+              validateCaptcha();
+              stopHoverTimeout(); // Stop teleport timer if clicked
+            }}
+            onMouseEnter={startHoverTimeout} // Start teleport timer on hover
+            onMouseLeave={stopHoverTimeout} // Stop teleport timer if mouse leaves
+            position={buttonPosition ? "absolute" : "relative"} // Initially relative for Flexbox alignment
+            top={buttonPosition?.top} // Apply random top position if teleported
+            left={buttonPosition?.left} // Apply random left position if teleported
+            transform={buttonPosition ? "translate(-50%, -50%)" : undefined} // Center button after teleporting
           >
             Submit
           </Button>
@@ -134,6 +168,7 @@ const Captcha: React.FC = () => {
           />
         </Flex>
 
+        {/* Result Message */}
         {result && (
           <Text
             fontSize="sm"
