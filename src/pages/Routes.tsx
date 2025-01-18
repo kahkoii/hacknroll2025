@@ -11,10 +11,10 @@ const App: React.FC = () => (
 		<Routes>
 			{/* Public Pages */}
 			<Route path="/*" element={<Home />} />
-			<Route path="/CoinFlip" element={<CoinFlip />}/>
-			<Route path="/MathProblemGame" element={<MathProblemGame />}/>
+			<Route path="/coinflip" element={<CoinFlip />} />
+			<Route path="/mathproblemgame" element={<MathProblemGame />} />
 			<Route path="/treasure" element={<Treasure />} />
-			<Route path="/Captcha" element={<Captcha />} />
+			<Route path="/captcha" element={<Captcha />} />
 		</Routes>
 	</Router>
 )

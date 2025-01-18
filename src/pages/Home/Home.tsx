@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 					<Text marginLeft="14px">Click </Text>
 					<Text
 						marginLeft="4px"
-						onClick={() => navigate('/treasure')}
+						onClick={() => navigate('/captcha')}
 						_hover={{ cursor: 'pointer' }}
 					>
 						here

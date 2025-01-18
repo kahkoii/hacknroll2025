@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './style.css'
 import { Flex, Text, Image, Box, Button, keyframes } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 const CoinFlip: React.FC = () => {
 	const [heads, setHeads] = useState<number>(0)
@@ -11,6 +12,7 @@ const CoinFlip: React.FC = () => {
 	const [showStage1, setStage1] = useState<boolean>(false)
 	const [showStage2, setStage2] = useState<boolean>(false)
 	const [showCongrats, setShowCongrats] = useState<boolean>(false)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (heads === 1) {
@@ -26,7 +28,7 @@ const CoinFlip: React.FC = () => {
 		if (heads === 3) {
 			// Show an alert when heads reaches 3
 			setShowCongrats(true)
-			setTimeout(() => setShowCongrats(false), 5000) // Hides after 5 seconds
+			setTimeout(() => navigate('/mathproblemgame'), 3000) // Hides after 5 seconds
 		}
 	}, [heads])
 
@@ -128,7 +130,8 @@ const CoinFlip: React.FC = () => {
 						color="green.500"
 						mt="4"
 					>
-						🎉 Congratulations! You got 3 heads in a row! 🎉
+						Perhaps you're lucky enough to be born human, but could
+						be brute force though...
 					</Text>
 				)}
 
