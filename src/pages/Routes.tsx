@@ -4,6 +4,7 @@ import Home from './Home/Home'
 import Treasure from './Treasure/Treasure'
 import CoinFlip from './CoinFlip/CoinFlip'
 import MathProblemGame from './MathProblemGame/MathProblemGame'
+import Captcha from './Captcha/Captcha'
 
 const App: React.FC = () => (
 	<Router>
@@ -13,6 +14,7 @@ const App: React.FC = () => (
 			<Route path="/CoinFlip" element={<CoinFlip />}/>
 			<Route path="/MathProblemGame" element={<MathProblemGame />}/>
 			<Route path="/treasure" element={<Treasure />} />
+			<Route path="/Captcha" element={<Captcha />} />
 		</Routes>
 	</Router>
 )
