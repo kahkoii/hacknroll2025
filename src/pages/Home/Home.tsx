@@ -1,11 +1,25 @@
 import { Flex, Checkbox, Text, Image, Spinner } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import img from '/images/captcha.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Home: React.FC = () => {
 	const [clicked, setClicked] = useState(false)
+	const [hereColour, setHereColour] = useState('rgb(0, 0, 0)')
+	const [blueIndex, setBlueIndex] = useState(0)
 	const navigate = useNavigate()
+
+	// Slowly highlight text after checkbox is clicked
+	useEffect(() => {
+		if (clicked) {
+			setTimeout(() => {
+				setBlueIndex(blueIndex + 10)
+				setHereColour('rgb(0, 0, ' + blueIndex + ')')
+				console.log(blueIndex)
+			}, 300)
+		}
+	}, [hereColour])
+
 	return (
 		<Flex
 			height="100vh"
@@ -31,6 +45,7 @@ const Home: React.FC = () => {
 							checked={clicked}
 							onChange={() => {
 								setTimeout(() => {
+									setHereColour('rgb(0, 0, 1)')
 									setClicked(!clicked)
 								}, 600)
 							}}
@@ -41,6 +56,7 @@ const Home: React.FC = () => {
 						marginLeft="4px"
 						onClick={() => navigate('/captcha')}
 						_hover={{ cursor: 'pointer' }}
+						color={hereColour}
 					>
 						here
 					</Text>{' '}
