@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text, Input, Button, Box, Image, IconButton } from "@chakra-ui/react";
-// import { RepeatIcon } from "@chakra-ui/icons"; // Temporary icon for the reset button
+import { RepeatIcon } from "@chakra-ui/icons";
 
 const Captcha: React.FC = () => {
   const captchaOptions = [
@@ -49,32 +49,53 @@ const Captcha: React.FC = () => {
       <Flex
         direction="column"
         align="center"
-        justify="center"
-        p="6"
+        // justify="center"
+        padding="3"
         bg="white"
-        borderRadius="md"
+        border="2px solid #40376E"
+        borderRadius="10px"
         boxShadow="lg"
         width="300px"
+        height="400px" // Fixed height for the entire box
       >
-        <Flex justify="space-between" width="100%" mb="4">
-          <Text fontSize="md" color="gray.600" textAlign="center">
-            Type the characters shown below
-          </Text>
-          <IconButton
-            aria-label="Reset CAPTCHA"
-            // icon={<RepeatIcon />} // Temporary icon
-            variant="ghost"
-            onClick={selectRandomCaptcha}
-          />
+        <Flex>
+          {/* Text with Border */}
+          <Box
+            mb="2" // Reduced margin-bottom
+            textAlign="center"
+            width="100%"
+            border="2px solid #2A73E8"
+            backgroundColor="#2A73E8"
+            color="white"
+            borderRadius="1px"
+            padding="8px"
+          >
+            <Text fontSize="md" fontWeight="bold">
+              Type the characters shown below
+            </Text>
+          </Box>
         </Flex>
-
-        {/* CAPTCHA Image */}
+      
+        {/* CAPTCHA Image Container with Fixed Dimensions */}
         {selectedCaptcha && (
-          <Box mb="4" textAlign="center">
+          <Box
+            mb="4"
+            textAlign="center"
+            width="250px" // Fixed width for the image container
+            height="150px" // Fixed height for the image container
+            bg="white"
+            borderRadius="md"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            overflow="hidden"
+          >
             <Image
               src={selectedCaptcha.image} // Dynamically link the image
               alt="CAPTCHA"
-              width="200px"
+              objectFit="contain" // Ensure the image scales proportionally
+              maxW="100%"
+              maxH="100%"
             />
           </Box>
         )}
@@ -90,13 +111,28 @@ const Captcha: React.FC = () => {
           focusBorderColor="blue.500"
         />
 
-        <Button
-          colorScheme="blue"
-          onClick={validateCaptcha}
-          width="100%"
-        >
-          Submit
-        </Button>
+        {/* Submit Button and Refresh Icon */}
+        <Flex width="100%" justifyContent="space-between" alignItems="center">
+          <Button
+            width="70%"
+            colorScheme="blue"
+            onClick={validateCaptcha}
+            flex="1"
+            mr="1"
+          >
+            Submit
+          </Button>
+          <IconButton
+            width="30%"
+            height="100%"
+            aria-label="Reset CAPTCHA"
+            icon={<RepeatIcon />}
+            onClick={selectRandomCaptcha}
+            variant="outline"
+            colorScheme="blue"
+            size="sm"
+          />
+        </Flex>
 
         {result && (
           <Text
