@@ -4,7 +4,7 @@ import { derivative, evaluate } from 'mathjs'
 import nerdamer from 'nerdamer'
 import 'nerdamer/Solve'
 import 'nerdamer/Calculus'
-import '/src/pages/background.css';
+import '/src/pages/background.css'
 
 const MathProblemGame: React.FC = () => {
 	const [problem, setProblem] = useState<string>('') // Math problem
@@ -94,15 +94,14 @@ const MathProblemGame: React.FC = () => {
 				"Either you're a really slow bot or really a human... hmmm which is it? 🤔",
 			)
 			setIsRunning(false) // Stop the game when the timer runs out
+			setTimeout(() => {
+				window.location.href = 'https://www.google.com'
+			}, 2000)
 		}
 	}, [isRunning, timeLeft])
 
 	return (
-		<Flex
-			height="100vh"
-			alignItems="center"
-			justifyContent="center"
-		>
+		<Flex height="100vh" alignItems="center" justifyContent="center">
 			<div className="background-container">
 				<div className="shape"></div>
 				<div className="shape"></div>
