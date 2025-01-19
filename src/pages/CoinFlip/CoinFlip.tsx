@@ -13,7 +13,6 @@ const CoinFlip: React.FC = () => {
 	const [showStage1, setStage1] = useState<boolean>(false)
 	const [showStage2, setStage2] = useState<boolean>(false)
 	const [showCongrats, setShowCongrats] = useState<boolean>(false)
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (heads === 1) {

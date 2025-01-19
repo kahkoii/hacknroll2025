@@ -79,7 +79,7 @@ const PictureCaptcha: React.FC = () => {
 					paddingLeft="24px"
 					gap={0}
 				>
-					<Text fontSize="md">Select all images with{score}</Text>
+					<Text fontSize="md">Select all images with</Text>
 					<Text marginTop="-5px" fontSize="2xl" fontWeight="bold">
 						different colours
 					</Text>
