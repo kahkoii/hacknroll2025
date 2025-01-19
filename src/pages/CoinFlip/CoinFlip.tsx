@@ -79,13 +79,12 @@ const CoinFlip: React.FC = () => {
 			flexDir="column"
 			alignItems="center"
 			justifyContent="center"
-			bg="white"
 		>
 			<div className="background-container">
 				<div className="shape"></div>
 				<div className="shape"></div>
 				<div className="shape"></div>
-			</div>
+			</div>	
 			<Box
 				bg="white"
 				p="8"

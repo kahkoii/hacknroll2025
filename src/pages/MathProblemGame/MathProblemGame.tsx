@@ -102,7 +102,6 @@ const MathProblemGame: React.FC = () => {
 			height="100vh"
 			alignItems="center"
 			justifyContent="center"
-			bg="white"
 		>
 			<div className="background-container">
 				<div className="shape"></div>
