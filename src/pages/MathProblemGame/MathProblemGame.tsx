@@ -4,6 +4,7 @@ import { derivative, evaluate } from 'mathjs'
 import nerdamer from 'nerdamer'
 import 'nerdamer/Solve'
 import 'nerdamer/Calculus'
+import '/src/pages/background.css';
 
 const MathProblemGame: React.FC = () => {
 	const [problem, setProblem] = useState<string>('') // Math problem
@@ -103,6 +104,11 @@ const MathProblemGame: React.FC = () => {
 			justifyContent="center"
 			bg="white"
 		>
+			<div className="background-container">
+				<div className="shape"></div>
+				<div className="shape"></div>
+				<div className="shape"></div>
+			</div>
 			<Flex
 				direction="column"
 				align="center"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './style.css'
+import '/src/pages/background.css';
 import { Flex, Text, Image, Box, Button, keyframes } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
@@ -78,14 +79,20 @@ const CoinFlip: React.FC = () => {
 			flexDir="column"
 			alignItems="center"
 			justifyContent="center"
-			bgGradient="linear(to-r, #575ce5 50%, #f9fbfc 50%)"
+			bg="white"
 		>
+			<div className="background-container">
+				<div className="shape"></div>
+				<div className="shape"></div>
+				<div className="shape"></div>
+			</div>
 			<Box
 				bg="white"
 				p="8"
-				borderRadius="md"
 				boxShadow="lg"
 				textAlign="center"
+				border="2px solid #40376E"
+				borderRadius="10px"
 			>
 				<Flex justify="space-between" mb="4">
 					<Text fontWeight="bold">Heads: {heads}</Text>

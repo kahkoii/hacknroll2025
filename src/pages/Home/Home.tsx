@@ -2,6 +2,8 @@ import { Flex, Checkbox, Text, Image, Spinner } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import img from '/images/captcha.svg'
 import { useEffect, useState } from 'react'
+import '/src/pages/background.css';
+
 
 const Home: React.FC = () => {
 	const [clicked, setClicked] = useState(false)
@@ -28,6 +30,11 @@ const Home: React.FC = () => {
 			alignItems="center"
 			justifyContent="center"
 		>
+			<div className="background-container">
+				<div className="shape"></div>
+				<div className="shape"></div>
+				<div className="shape"></div>
+			</div>
 			<Flex
 				flexDir="row"
 				width="320px"

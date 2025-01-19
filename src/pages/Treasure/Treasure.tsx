@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react'
+import '/src/pages/background.css';
 
 const Treasure: React.FC = () => {
 	return (
