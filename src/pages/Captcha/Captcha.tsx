@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { RepeatIcon } from '@chakra-ui/icons'
-import '/src/pages/background.css';
+import '/src/pages/background.css'
 
 const Captcha: React.FC = () => {
 	const captchaOptions = [
@@ -107,7 +107,7 @@ const Captcha: React.FC = () => {
 			p="4"
 			position="relative"
 		>
-      <div className="background-container">
+			<div className="background-container">
 				<div className="shape"></div>
 				<div className="shape"></div>
 				<div className="shape"></div>

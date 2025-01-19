@@ -6,6 +6,7 @@ import CoinFlip from './CoinFlip/CoinFlip'
 import MathProblemGame from './MathProblemGame/MathProblemGame'
 import Captcha from './Captcha/Captcha'
 import AimTrainer from './AimTrainer/AimTrainer'
+import PictureCaptcha from './PictureCaptcha/PictureCaptcha'
 
 const App: React.FC = () => (
 	<Router>
@@ -17,6 +18,7 @@ const App: React.FC = () => (
 			<Route path="/treasure" element={<Treasure />} />
 			<Route path="/captcha" element={<Captcha />} />
 			<Route path="/aimtrainer" element={<AimTrainer />} />
+			<Route path="/picturecaptcha" element={<PictureCaptcha />} />
 		</Routes>
 	</Router>
 )

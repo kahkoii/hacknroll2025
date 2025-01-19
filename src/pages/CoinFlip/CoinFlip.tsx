@@ -29,7 +29,7 @@ const CoinFlip: React.FC = () => {
 		if (heads === 3) {
 			// Show an alert when heads reaches 3
 			setShowCongrats(true)
-			setTimeout(() => navigate('/mathproblemgame'), 3000) // Hides after 5 seconds
+			setTimeout(() => navigate('/picturecaptcha'), 3000) // Hides after 5 seconds
 		}
 	}, [heads])
 
@@ -84,7 +84,7 @@ const CoinFlip: React.FC = () => {
 				<div className="shape"></div>
 				<div className="shape"></div>
 				<div className="shape"></div>
-			</div>	
+			</div>
 			<Box
 				bg="white"
 				p="8"
