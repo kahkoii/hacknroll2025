@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import '/src/pages/background.css';
 
 const AimTrainer: React.FC = () => {
   const [targetVisible, setTargetVisible] = useState<boolean>(false); // Is the target visible?
@@ -57,6 +58,11 @@ const AimTrainer: React.FC = () => {
       position="relative"
       bg="gray.100"
     >
+      <div className="background-container">
+				<div className="shape"></div>
+				<div className="shape"></div>
+				<div className="shape"></div>
+			</div>
       {/* Game Info */}
       <Box
         position="absolute"
