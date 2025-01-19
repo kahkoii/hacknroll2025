@@ -68,7 +68,7 @@ const Captcha: React.FC = () => {
 		if (hoverTimeout) clearTimeout(hoverTimeout) // Clear any existing timer
 		const timeout = setTimeout(() => {
 			teleportButton() // Teleport button after 1000ms
-		}, 110)
+		}, 130)
 		setHoverTimeout(timeout as unknown as number)
 	}
 
