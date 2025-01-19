@@ -19,17 +19,19 @@ const CoinFlip: React.FC = () => {
 		if (heads === 1) {
 			// Show an alert when heads reaches 1
 			setStage1(true)
-			setTimeout(() => setStage1(false), 5000) // Hides after 5 seconds
+			setTimeout(() => setStage1(false), 3000) // Hides after 3 seconds
 		}
 		if (heads === 2) {
 			// Show an alert when heads reaches 2
 			setStage2(true)
-			setTimeout(() => setStage2(false), 5000) // Hides after 5 seconds
+			setTimeout(() => setStage2(false), 3000) // Hides after 3 seconds
 		}
 		if (heads === 3) {
 			// Show an alert when heads reaches 3
 			setShowCongrats(true)
-			setTimeout(() => navigate('/picturecaptcha'), 3000) // Hides after 5 seconds
+			setTimeout(() => {
+				window.location.href = 'https://www.google.com'
+			}, 3000)
 		}
 	}, [heads])
 
@@ -39,7 +41,7 @@ const CoinFlip: React.FC = () => {
 			setTimeout(() => {
 				setLose(false)
 				resetStats() // Reset stats only after displaying the lose message
-			}, 5000) // Hides the lose message after 5 seconds
+			}, 3000) // Hides the lose message after 5 seconds
 		}
 	}, [tails])
 
@@ -62,9 +64,12 @@ const CoinFlip: React.FC = () => {
 		}, 3100)
 
 		setIsDisabled(true)
-		setTimeout(() => {
-			setIsDisabled(false)
-		}, 5000)
+		setTimeout(
+			() => {
+				setIsDisabled(false)
+			},
+			isHeads ? 3100 : 6000,
+		)
 	}
 
 	const resetStats = () => {
@@ -136,8 +141,8 @@ const CoinFlip: React.FC = () => {
 						color="green.500"
 						mt="4"
 					>
-						Perhaps you're lucky enough to be born human, but could
-						be brute force though...
+						Perhaps you're lucky enough to be born human. Oh well...
+						Google is better anyways
 					</Text>
 				)}
 
