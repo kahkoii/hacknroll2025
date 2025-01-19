@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './style.css'
-import '/src/pages/background.css';
+import '/src/pages/background.css'
 import { Flex, Text, Image, Box, Button, keyframes } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
@@ -64,7 +64,7 @@ const CoinFlip: React.FC = () => {
 		setIsDisabled(true)
 		setTimeout(() => {
 			setIsDisabled(false)
-		}, 3000)
+		}, 5000)
 	}
 
 	const resetStats = () => {
