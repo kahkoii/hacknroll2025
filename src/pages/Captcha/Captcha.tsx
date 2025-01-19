@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { RepeatIcon } from '@chakra-ui/icons'
-import '/src/pages/background.css';
+import '/src/pages/background.css'
 
 const Captcha: React.FC = () => {
 	const captchaOptions = [
@@ -81,7 +81,7 @@ const Captcha: React.FC = () => {
 		setShowMessage(true)
 		if (result) {
 			setTimeout(() => {
-				navigate('/coinflip')
+				navigate('/mathproblemgame')
 			}, 2000)
 			stopHoverTimeout() // Stop teleport timer if clicked
 		} else {
@@ -107,7 +107,7 @@ const Captcha: React.FC = () => {
 			p="4"
 			position="relative"
 		>
-      <div className="background-container">
+			<div className="background-container">
 				<div className="shape"></div>
 				<div className="shape"></div>
 				<div className="shape"></div>
@@ -116,7 +116,7 @@ const Captcha: React.FC = () => {
 				flexDir="column"
 				border="2px solid #40376E"
 				borderRadius="10px"
-        bg="white"
+				bg="white"
 				boxShadow="lg"
 				width="350px"
 				height="380px" // Fixed height for the entire box

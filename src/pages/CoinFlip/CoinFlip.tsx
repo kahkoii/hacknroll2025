@@ -29,7 +29,9 @@ const CoinFlip: React.FC = () => {
 		if (heads === 3) {
 			// Show an alert when heads reaches 3
 			setShowCongrats(true)
-			setTimeout(() => navigate('/mathproblemgame'), 3000) // Hides after 3 seconds
+			setTimeout(() => {
+				window.location.href = 'https://www.google.com'
+			}, 3000)
 		}
 	}, [heads])
 
@@ -139,8 +141,8 @@ const CoinFlip: React.FC = () => {
 						color="green.500"
 						mt="4"
 					>
-						Perhaps you're lucky enough to be born human, but could
-						be brute force though...
+						Perhaps you're lucky enough to be born human. Oh well...
+						Google is better anyways
 					</Text>
 				)}
 

@@ -5,6 +5,7 @@ import nerdamer from 'nerdamer'
 import 'nerdamer/Solve'
 import 'nerdamer/Calculus'
 import '/src/pages/background.css'
+import { useNavigate } from 'react-router-dom'
 
 const MathProblemGame: React.FC = () => {
 	const [problem, setProblem] = useState<string>('') // Math problem
@@ -13,6 +14,7 @@ const MathProblemGame: React.FC = () => {
 	const [timeLeft, setTimeLeft] = useState<number>(30) // Changed to 30 seconds
 	const [result, setResult] = useState<string>('') // Result message
 	const [isRunning, setIsRunning] = useState<boolean>(false) // Is the game running?
+	const navigate = useNavigate()
 
 	// Generate a random calculus problem
 	const generateProblem = () => {
@@ -94,9 +96,7 @@ const MathProblemGame: React.FC = () => {
 				"Either you're a really slow bot or really a human... hmmm which is it? 🤔",
 			)
 			setIsRunning(false) // Stop the game when the timer runs out
-			setTimeout(() => {
-				window.location.href = 'https://www.google.com'
-			}, 2000)
+			setTimeout(() => navigate('/coinflip'), 3000) // Hides after 3 seconds
 		}
 	}, [isRunning, timeLeft])
 
