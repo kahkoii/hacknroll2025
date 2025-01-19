@@ -81,7 +81,7 @@ const Captcha: React.FC = () => {
 		setShowMessage(true)
 		if (result) {
 			setTimeout(() => {
-				navigate('/mathproblemgame')
+				navigate('/picturecaptcha')
 			}, 2000)
 			stopHoverTimeout() // Stop teleport timer if clicked
 		} else {

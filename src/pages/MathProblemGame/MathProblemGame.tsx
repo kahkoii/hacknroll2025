@@ -11,7 +11,7 @@ const MathProblemGame: React.FC = () => {
 	const [problem, setProblem] = useState<string>('') // Math problem
 	const [answer, setAnswer] = useState<string>('') // User's input
 	const [correctAnswer, setCorrectAnswer] = useState<number>(0) // Correct answer
-	const [timeLeft, setTimeLeft] = useState<number>(30) // Changed to 30 seconds
+	const [timeLeft, setTimeLeft] = useState<number>(15) // Changed to 15 seconds
 	const [result, setResult] = useState<string>('') // Result message
 	const [isRunning, setIsRunning] = useState<boolean>(false) // Is the game running?
 	const navigate = useNavigate()
@@ -58,14 +58,14 @@ const MathProblemGame: React.FC = () => {
 		setCorrectAnswer(Number(solution.toFixed(2))) // Round the solution to 2 decimal places
 		setAnswer('')
 		setResult('')
-		setTimeLeft(30) // Reset the timer to 30 seconds
+		setTimeLeft(15) // Reset the timer to 15 seconds
 	}
 
 	// Start the game
 	const startGame = () => {
 		generateProblem()
 		setIsRunning(true)
-		setTimeLeft(30) // Set to 30 seconds
+		setTimeLeft(15) // Set to 15 seconds
 	}
 
 	// Handle input change
