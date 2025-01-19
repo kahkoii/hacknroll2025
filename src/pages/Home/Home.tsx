@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 const Home: React.FC = () => {
 	const [clicked, setClicked] = useState(false)
+	const [showMessage, setShowMessage] = useState(false)
 	const [hereColour, setHereColour] = useState('rgb(0, 0, 0)')
 	const [blueIndex, setBlueIndex] = useState(0)
 	const navigate = useNavigate()
@@ -54,7 +55,12 @@ const Home: React.FC = () => {
 					<Text marginLeft="14px">Click </Text>
 					<Text
 						marginLeft="4px"
-						onClick={() => navigate('/captcha')}
+						onClick={() => {
+							setShowMessage(true)
+							setTimeout(() => {
+								navigate('/captcha')
+							}, 3000)
+						}}
 						_hover={{ cursor: 'pointer' }}
 						color={hereColour}
 					>
@@ -78,6 +84,13 @@ const Home: React.FC = () => {
 					</Text>
 				</Flex>
 			</Flex>
+			<Text
+				marginTop="20px"
+				color="green.500"
+				visibility={showMessage ? 'initial' : 'hidden'}
+			>
+				Looks an awful lot like a bot... more tests required!
+			</Text>
 		</Flex>
 	)
 }
