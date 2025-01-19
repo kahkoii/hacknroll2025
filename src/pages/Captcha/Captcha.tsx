@@ -15,9 +15,9 @@ import '/src/pages/background.css';
 const Captcha: React.FC = () => {
 	const captchaOptions = [
 		{ text: 'qVpXayk', image: '/images/Captcha.png' },
-		{ text: 'AAxUE', image: '/images/Captcha2.png' },
+		{ text: 'AAXUE', image: '/images/Captcha2.png' },
 		{ text: 'CAPTCHA', image: '/images/Captcha3.png' },
-		{ text: '18 + 5 =', image: '/images/Captcha4.png' },
+		{ text: '18+5=', image: '/images/Captcha4.png' },
 		{ text: 'orrHaa rmallsal', image: '/images/Captcha5.png' },
 	]
 
@@ -116,6 +116,7 @@ const Captcha: React.FC = () => {
 				flexDir="column"
 				border="2px solid #40376E"
 				borderRadius="10px"
+        bg="white"
 				boxShadow="lg"
 				width="350px"
 				height="380px" // Fixed height for the entire box
